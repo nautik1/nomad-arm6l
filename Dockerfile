@@ -1,7 +1,7 @@
-FROM amd64/ubuntu:16.04 as builder
+FROM amd64/ubuntu:18.04 as builder
 
-ENV go_version=go1.12.2.linux-amd64
-ARG nomad_version="v0.9.0"
+ENV go_version=go1.17.3.linux-amd64
+ARG nomad_version="v1.1.6"
 ENV GOPATH=/root/go
 ENV PATH="$PATH:/usr/local/go/bin:/root/go/bin"
 
@@ -16,5 +16,5 @@ RUN bash /build.sh
 
 FROM alpine:latest
 COPY --from=builder \
-  /root/go/src/github.com/hashicorp/nomad/dist/linux_arm_6/nomad \
+  /root/go/src/github.com/hashicorp/nomad/dist/nomad_linux_arm_6/nomad \
   /usr/bin/nomad
